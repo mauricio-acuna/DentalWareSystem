@@ -20,4 +20,6 @@ public final class Enums {
     public enum TipoEventoAuditoria {ACCESO, LECTURA, MODIFICACION, ELIMINACION, CREACION, EXPORTACION, ACCESO_DENEGADO}
     public enum ResultadoEvento {EXITO, ERROR}
     public enum NivelSeveridadEvento {INFO, ADVERTENCIA, CRITICO}
+    public enum RolUsuario {ADMIN, ODONTOLOGO, HIGIENISTA, RECEPCION, FINANZAS}
+    public enum EstadoUsuario {ACTIVO, BLOQUEADO, INACTIVO}
 }

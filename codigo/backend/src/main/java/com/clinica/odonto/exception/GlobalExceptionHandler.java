@@ -3,6 +3,7 @@ package com.clinica.odonto.exception;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -34,6 +35,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     ResponseEntity<ApiError> integrity(DataIntegrityViolationException exception) {
         return build(HttpStatus.CONFLICT, "No se pudo guardar por una restriccion de integridad", List.of());
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    ResponseEntity<ApiError> badCredentials(BadCredentialsException exception) {
+        return build(HttpStatus.UNAUTHORIZED, exception.getMessage(), List.of());
     }
 
     private ResponseEntity<ApiError> build(HttpStatus status, String message, List<String> details) {

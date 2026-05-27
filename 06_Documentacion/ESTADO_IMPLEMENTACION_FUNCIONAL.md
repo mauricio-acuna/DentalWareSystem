@@ -25,9 +25,10 @@ Lo existente es un **backend funcional en desarrollo** con verticales de:
 - Inventario basico.
 - Facturas y pagos basicos.
 - Auditoria persistente basica.
+- Usuarios, roles y login JWT basico.
 - Reportes basicos de ingresos y actividad.
 
-La documentacion describe un sistema completo con 25+ entidades, 40+ endpoints, seguridad avanzada, documentos, radiografias, compras, usuarios, roles, integraciones y cumplimiento operativo. Una parte importante del alcance sigue pendiente, especialmente seguridad productiva, compras/proveedores, historia clinica avanzada, documentos clinicos, frontend y RGPD completo.
+La documentacion describe un sistema completo con 25+ entidades, 40+ endpoints, seguridad avanzada, documentos, radiografias, compras, integraciones y cumplimiento operativo. Una parte importante del alcance sigue pendiente, especialmente seguridad productiva completa, compras/proveedores, historia clinica avanzada, documentos clinicos, frontend y RGPD completo.
 
 ---
 
@@ -44,7 +45,7 @@ mvn.cmd verify
 Resultado:
 
 - Build: correcto.
-- Pruebas: 9 ejecutadas, 0 fallos.
+- Pruebas: 11 ejecutadas, 0 fallos.
 - JaCoCo: puerta de cobertura configurada superada.
 - Artefacto: `target/odonto-backend-1.0.0.jar` generado.
 
@@ -64,6 +65,7 @@ Controladores actuales:
 - `DiagnosticoController`
 - `ReporteController`
 - `AuditoriaController`
+- `AuthController`
 
 Rutas implementadas:
 
@@ -97,6 +99,8 @@ Rutas implementadas:
 | Reportes | GET | `/api/v1/reportes/ingresos` | Implementado basico |
 | Reportes | GET | `/api/v1/reportes/actividad` | Implementado basico |
 | Auditoria | GET | `/api/v1/auditoria/eventos` | Implementado basico |
+| Seguridad | POST | `/api/v1/usuarios` | Implementado basico |
+| Seguridad | POST | `/api/v1/auth/login` | Implementado basico con JWT |
 
 ---
 
@@ -125,7 +129,7 @@ Rutas implementadas:
 | Reporte cobranza | Parcial | Existe `/facturas/pendientes`, no reporte documentado. |
 | Reporte actividad clinica | Implementado basico | Cuenta citas, tratamientos y diagnosticos por periodo. Faltan KPIs clinicos avanzados. |
 | Rate limiting | No implementado | Solo documentado. |
-| OAuth2/OIDC/JWT/2FA | No implementado | Seguridad actual permite endpoints para desarrollo. |
+| OAuth2/OIDC/JWT/2FA | Parcial | Existe login JWT propio y roles basicos. Falta OIDC externo, MFA, politicas de sesion, rotacion, refresh tokens y enforcement productivo completo. |
 | Headers requeridos | No implementado | No se exige `X-Clinic-ID`, `X-Request-ID`, `X-Timestamp`. |
 
 ---
@@ -165,6 +169,7 @@ Entidades implementadas en codigo:
 - `SesionTratamiento`
 - `Diagnostico`
 - `EventoAuditoria`
+- `UsuarioSistema`
 
 Entidades documentadas pero no implementadas, entre otras:
 
@@ -179,7 +184,6 @@ Entidades documentadas pero no implementadas, entre otras:
 - Radiografia.
 - Prescripcion.
 - DocumentoClinico.
-- UsuarioSistema.
 - Rol.
 - Permiso.
 - EquipoClinico.
@@ -193,9 +197,9 @@ Entidades documentadas pero no implementadas, entre otras:
 
 ### Criticos antes de produccion
 
-- No hay autenticacion real.
-- No hay autorizacion por roles.
-- La auditoria persistente es basica y no esta ligada todavia a autenticacion real.
+- La autenticacion JWT existe en version inicial y puede activarse con `APP_SECURITY_ENABLED=true`, pero no reemplaza todavia un esquema productivo OIDC/MFA.
+- La autorizacion por roles existe como base de modelo, pero faltan reglas finas por endpoint y matriz RBAC completa.
+- La auditoria persistente es basica y todavia debe enlazarse a usuario autenticado, IP, request id y tenant/clinica.
 - No hay migraciones de base de datos.
 - No hay implementacion completa de RGPD.
 - No hay cifrado de campos sensibles.

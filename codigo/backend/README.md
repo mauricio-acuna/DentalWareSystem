@@ -28,6 +28,26 @@ Puntos utiles:
 - Facturas: `/api/v1/facturas`
 - Reportes: `/api/v1/reportes`
 - Auditoria: `/api/v1/auditoria/eventos`
+- Usuarios: `POST /api/v1/usuarios`
+- Login: `POST /api/v1/auth/login`
+
+## Seguridad
+
+Por defecto la autenticacion queda desactivada para desarrollo local:
+
+```yaml
+app.security.enabled: false
+```
+
+Para exigir JWT en los endpoints protegidos:
+
+```powershell
+$env:APP_SECURITY_ENABLED="true"
+$env:JWT_SECRET="cambia-este-secreto-por-uno-de-32-bytes-minimo"
+mvn spring-boot:run
+```
+
+`POST /api/v1/auth/login` devuelve un token `Bearer` para usuarios creados en `/api/v1/usuarios`.
 
 ## Calidad automatizada
 

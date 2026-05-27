@@ -12,7 +12,7 @@
 
 Ademas de la documentacion funcional, el repositorio ya incluye un backend Spring Boot en `codigo/backend`.
 
-El estado verificable del codigo esta documentado en [06_Documentacion/ESTADO_IMPLEMENTACION_FUNCIONAL.md](./06_Documentacion/ESTADO_IMPLEMENTACION_FUNCIONAL.md). Actualmente cubre pacientes, citas, disponibilidad basica, inventario, facturacion/pagos, tratamientos basicos, diagnosticos basicos, auditoria basica y reportes iniciales. Todavia no debe considerarse listo para produccion: faltan seguridad productiva, usuarios/roles, migraciones, frontend, RGPD completo, compras/proveedores, documentos clinicos, radiografias e integraciones.
+El estado verificable del codigo esta documentado en [06_Documentacion/ESTADO_IMPLEMENTACION_FUNCIONAL.md](./06_Documentacion/ESTADO_IMPLEMENTACION_FUNCIONAL.md). Actualmente cubre pacientes, citas, disponibilidad basica, inventario, facturacion/pagos, tratamientos basicos, diagnosticos basicos, auditoria basica, usuarios/roles con login JWT inicial y reportes. Todavia no debe considerarse listo para produccion: faltan seguridad productiva completa, migraciones, frontend, RGPD completo, compras/proveedores, documentos clinicos, radiografias e integraciones.
 
 Para validar el backend:
 
