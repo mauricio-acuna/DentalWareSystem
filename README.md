@@ -45,7 +45,7 @@ Se ha generado una **documentación completa y profesional** para la implementac
 
 ---
 
-## 📚 DOCUMENTOS GENERADOS (11 archivos)
+## 📚 DOCUMENTOS GENERADOS (21+ archivos)
 
 ### 📄 Documentos Maestros (Raíz)
 
@@ -184,11 +184,42 @@ Se ha generado una **documentación completa y profesional** para la implementac
       - Gestión de inventario
       - Auditoría y cumplimiento
 
+13. **MANUAL_USUARIO.md**
+    - Guía operativa para recepción, clínica, administración y dirección
+    - Flujos actuales de pacientes, citas, inventario, facturación y pagos
+    - Errores frecuentes y buenas prácticas
+
+14. **MANUAL_MANTENIMIENTO.md**
+    - Rutinas diarias, semanales, mensuales y trimestrales
+    - Runbooks de incidentes
+    - Backups, restauración, seguridad y actualización de dependencias
+
+15. **TRABAJO_EQUIPO_VERSIONADO.md**
+    - Modelo de ramas
+    - Convenciones de commits
+    - Versionado SemVer y versionado de API
+    - Definition of Ready/Done y proceso de PR
+
+16. **DASHBOARD_TAREAS.md**
+    - Estados del tablero
+    - Campos recomendados para GitHub Projects/Jira/Linear
+    - Épicas iniciales y plantillas de tarea
+
+17. **ROADMAP_TECNICO_MEJORAS.md**
+    - Mejoras prioritarias antes de producción
+    - Evolución de stack tecnológico
+    - Diseño de dominio, calidad, seguridad y observabilidad
+
+18. **INTEGRACIONES_IA_APIS.md**
+    - Integraciones externas recomendadas
+    - Casos de uso de IA permitidos y restringidos
+    - Arquitectura segura para proveedores de IA
+
 ---
 
 ### 📁 07_Configuracion/
 
-13. **ARCHIVOS_CONFIGURACION.md**
+19. **ARCHIVOS_CONFIGURACION.md**
     - **.env** con 100+ variables de configuración
     - **docker-compose.yml** completo (PostgreSQL + Redis + Apps)
     - **Kubernetes Helm values** para despliegue profesional
@@ -196,13 +227,23 @@ Se ha generado una **documentación completa y profesional** para la implementac
     - **.gitignore** para repositorio
     - Configuración de CI/CD
 
+20. **DESPLIEGUE_PRODUCCION.md**
+    - Entornos local/dev/staging/prod
+    - Build, Docker, smoke tests, blue/green, canary y rollback
+    - Checklist pre-go-live y responsabilidades
+
+21. **CONFIGURACION_PRODUCCION.md**
+    - Variables mínimas de producción
+    - Gestión de secretos
+    - Backups, logs, hardening y feature flags
+
 ---
 
 ## 📊 ESTADÍSTICAS DEL PROYECTO
 
 ```
-Documentos generados:        13
-Páginas de documentación:    300+
+Documentos generados:        21+
+Páginas de documentación:    380+
 Líneas de código SQL:        1500+
 Endpoints API documentados:  40+
 Entidades de BD:             25+

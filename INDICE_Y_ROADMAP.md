@@ -78,6 +78,41 @@
   - Gestión de inventario
   - Auditoría y cumplimiento
 
+- **06_Documentacion/MANUAL_USUARIO.md** - Manual operativo de usuario
+  - Alta de pacientes
+  - Gestión de citas
+  - Inventario
+  - Facturación y pagos
+  - Errores frecuentes
+
+- **06_Documentacion/MANUAL_MANTENIMIENTO.md** - Manual para soporte y operación técnica
+  - Rutinas de mantenimiento
+  - Runbooks de incidentes
+  - Backups y restauración
+  - Actualización de dependencias
+
+- **06_Documentacion/TRABAJO_EQUIPO_VERSIONADO.md** - Gobernanza del desarrollo
+  - Ramas, commits y PRs
+  - Versionado semántico
+  - Versionado de API
+  - Definition of Ready y Done
+
+- **06_Documentacion/DASHBOARD_TAREAS.md** - Estructura para tablero de proyecto
+  - Estados y campos
+  - Épicas iniciales
+  - Plantillas de tareas
+  - Métricas de seguimiento
+
+- **06_Documentacion/ROADMAP_TECNICO_MEJORAS.md** - Evolución técnica
+  - Mejoras P0/P1/P2
+  - Stack futuro
+  - Calidad, observabilidad y seguridad
+
+- **06_Documentacion/INTEGRACIONES_IA_APIS.md** - Integraciones externas e IA
+  - Email, SMS, pagos, contabilidad, FHIR/DICOM
+  - IA segura con humano en el circuito
+  - Auditoría y evaluación de proveedores
+
 #### 8. CONFIGURACIÓN
 - **07_Configuracion/ARCHIVOS_CONFIGURACION.md** - Archivos de configuración
   - Variables de entorno (.env)
@@ -85,6 +120,19 @@
   - Kubernetes Helm values
   - .gitignore
   - Nginx configuration
+
+- **07_Configuracion/DESPLIEGUE_PRODUCCION.md** - Guía de despliegue productivo
+  - Entornos
+  - Artefactos
+  - Rolling, blue/green, canary
+  - Smoke tests y rollback
+
+- **07_Configuracion/CONFIGURACION_PRODUCCION.md** - Configuración productiva
+  - Secretos
+  - Base de datos
+  - Logs
+  - Backups
+  - Hardening
 
 ---
 
@@ -631,4 +679,12 @@ PRÓXIMAS 4 SEMANAS:
 - 📄 [05_Seguridad/POLITICA_SEGURIDAD_CUMPLIMIENTO.md](./05_Seguridad/POLITICA_SEGURIDAD_CUMPLIMIENTO.md)
 - 📄 [06_Documentacion/GUIA_IMPLEMENTACION.md](./06_Documentacion/GUIA_IMPLEMENTACION.md)
 - 📄 [06_Documentacion/PROCESOS_NEGOCIO.md](./06_Documentacion/PROCESOS_NEGOCIO.md)
+- 📄 [06_Documentacion/MANUAL_USUARIO.md](./06_Documentacion/MANUAL_USUARIO.md)
+- 📄 [06_Documentacion/MANUAL_MANTENIMIENTO.md](./06_Documentacion/MANUAL_MANTENIMIENTO.md)
+- 📄 [06_Documentacion/TRABAJO_EQUIPO_VERSIONADO.md](./06_Documentacion/TRABAJO_EQUIPO_VERSIONADO.md)
+- 📄 [06_Documentacion/DASHBOARD_TAREAS.md](./06_Documentacion/DASHBOARD_TAREAS.md)
+- 📄 [06_Documentacion/ROADMAP_TECNICO_MEJORAS.md](./06_Documentacion/ROADMAP_TECNICO_MEJORAS.md)
+- 📄 [06_Documentacion/INTEGRACIONES_IA_APIS.md](./06_Documentacion/INTEGRACIONES_IA_APIS.md)
 - 📄 [07_Configuracion/ARCHIVOS_CONFIGURACION.md](./07_Configuracion/ARCHIVOS_CONFIGURACION.md)
+- 📄 [07_Configuracion/DESPLIEGUE_PRODUCCION.md](./07_Configuracion/DESPLIEGUE_PRODUCCION.md)
+- 📄 [07_Configuracion/CONFIGURACION_PRODUCCION.md](./07_Configuracion/CONFIGURACION_PRODUCCION.md)
