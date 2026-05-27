@@ -2,12 +2,14 @@ package com.clinica.odonto.controller;
 
 import com.clinica.odonto.dto.CitaRequest;
 import com.clinica.odonto.dto.CitaResponse;
+import com.clinica.odonto.dto.DisponibilidadResponse;
 import com.clinica.odonto.service.CitaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @RestController
@@ -43,5 +45,13 @@ public class CitaController {
     @PutMapping("/citas/{id}")
     public CitaResponse reprogramar(@PathVariable UUID id, @Valid @RequestBody CitaRequest request) {
         return service.reprogramar(id, request);
+    }
+
+    @GetMapping("/disponibilidad")
+    public DisponibilidadResponse disponibilidad(
+            @RequestParam LocalDate fechaInicio,
+            @RequestParam LocalDate fechaFin,
+            @RequestParam(required = false) UUID idDentista) {
+        return service.disponibilidad(fechaInicio, fechaFin, idDentista);
     }
 }

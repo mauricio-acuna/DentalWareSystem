@@ -10,4 +10,6 @@ public interface PagoRepository extends JpaRepository<Pago, UUID> {
     long countByFacturaIdFactura(UUID idFactura);
 
     List<Pago> findByFacturaIdFactura(UUID idFactura);
+
+    List<Pago> findByFechaPagoBetween(java.time.LocalDate fechaInicio, java.time.LocalDate fechaFin);
 }

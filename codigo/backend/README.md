@@ -1,6 +1,6 @@
 # OdontoSystems Backend
 
-Backend Spring Boot para el MVP operativo de OdontoSystems.
+Backend Spring Boot para el sistema OdontoSystems en desarrollo.
 
 ## Requisitos
 
@@ -21,8 +21,13 @@ Puntos utiles:
 - Swagger UI: `GET /api/v1/swagger-ui.html`
 - Pacientes: `/api/v1/pacientes`
 - Citas: `/api/v1/citas`
+- Disponibilidad: `/api/v1/disponibilidad`
+- Tratamientos: `/api/v1/tratamientos`
+- Diagnosticos: `/api/v1/pacientes/{idPaciente}/diagnosticos`
 - Inventario: `/api/v1/inventario`
 - Facturas: `/api/v1/facturas`
+- Reportes: `/api/v1/reportes`
+- Auditoria: `/api/v1/auditoria/eventos`
 
 ## Calidad automatizada
 

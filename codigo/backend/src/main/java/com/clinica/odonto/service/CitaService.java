@@ -2,6 +2,7 @@ package com.clinica.odonto.service;
 
 import com.clinica.odonto.dto.CitaRequest;
 import com.clinica.odonto.dto.CitaResponse;
+import com.clinica.odonto.dto.DisponibilidadResponse;
 import com.clinica.odonto.exception.BusinessRuleException;
 import com.clinica.odonto.exception.NotFoundException;
 import com.clinica.odonto.model.Cita;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -62,6 +65,34 @@ public class CitaService {
         validarHorario(request, id);
         applyRequest(cita, request);
         return toResponse(repository.save(cita));
+    }
+
+    @Transactional(readOnly = true)
+    public DisponibilidadResponse disponibilidad(LocalDate fechaInicio, LocalDate fechaFin, UUID idDentista) {
+        if (fechaFin.isBefore(fechaInicio)) {
+            throw new BusinessRuleException("La fecha de fin debe ser posterior o igual a la fecha de inicio");
+        }
+        List<Cita> citas = idDentista == null
+                ? List.of()
+                : repository.findByIdDentistaAndFechaCitaBetween(idDentista, fechaInicio, fechaFin);
+        List<DisponibilidadResponse.DiaDisponibilidad> dias = new ArrayList<>();
+        LocalDate cursor = fechaInicio;
+        while (!cursor.isAfter(fechaFin)) {
+            List<DisponibilidadResponse.HoraDisponible> horas = new ArrayList<>();
+            for (LocalTime hora = LocalTime.of(9, 0); hora.isBefore(LocalTime.of(18, 0)); hora = hora.plusMinutes(30)) {
+                LocalDate fecha = cursor;
+                LocalTime slot = hora;
+                boolean ocupado = citas.stream().anyMatch(cita ->
+                        cita.getFechaCita().equals(fecha)
+                                && cita.getEstado() != EstadoCita.CANCELADA
+                                && slot.isBefore(cita.getHoraFin())
+                                && slot.plusMinutes(30).isAfter(cita.getHoraInicio()));
+                horas.add(new DisponibilidadResponse.HoraDisponible(hora, !ocupado));
+            }
+            dias.add(new DisponibilidadResponse.DiaDisponibilidad(cursor, horas));
+            cursor = cursor.plusDays(1);
+        }
+        return new DisponibilidadResponse(dias);
     }
 
     private Cita find(UUID id) {

@@ -12,4 +12,6 @@ public interface FacturaRepository extends JpaRepository<Factura, UUID> {
     long countByFechaFactura(LocalDate fechaFactura);
 
     List<Factura> findByEstado(EstadoFactura estado);
+
+    List<Factura> findByFechaFacturaBetween(LocalDate fechaInicio, LocalDate fechaFin);
 }

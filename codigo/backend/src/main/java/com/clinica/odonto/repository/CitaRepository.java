@@ -18,4 +18,10 @@ public interface CitaRepository extends JpaRepository<Cita, UUID> {
             EstadoCita estado);
 
     List<Cita> findByPacienteIdPaciente(UUID idPaciente);
+
+    List<Cita> findByIdDentistaAndFechaCitaBetween(UUID idDentista, LocalDate fechaInicio, LocalDate fechaFin);
+
+    long countByFechaCitaBetween(LocalDate fechaInicio, LocalDate fechaFin);
+
+    long countByEstadoAndFechaCitaBetween(EstadoCita estado, LocalDate fechaInicio, LocalDate fechaFin);
 }

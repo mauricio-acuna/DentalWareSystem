@@ -14,4 +14,10 @@ public final class Enums {
     public enum TipoFactura {ORDINARIA, SIMPLIFICADA, RECTIFICATIVA, COMPLEMENTARIA}
     public enum EstadoFactura {EMITIDA, PAGADA, PARCIAL, VENCIDA, CANCELADA, ANULADA}
     public enum FormaPago {EFECTIVO, TRANSFERENCIA, TARJETA, CHEQUE, DOMICILIACION}
+    public enum ClasificacionTratamiento {PREVENTIVA, RESTAURADORA, ENDODONCIA, PERIODONTAL, QUIRURGICA, ORTODONCIA, ESTETICA}
+    public enum EstadoTratamiento {PENDIENTE, EN_CURSO, COMPLETADO, SUSPENDIDO, CANCELADO}
+    public enum SeveridadDiagnostico {LEVE, MODERADA, SEVERA}
+    public enum TipoEventoAuditoria {ACCESO, LECTURA, MODIFICACION, ELIMINACION, CREACION, EXPORTACION, ACCESO_DENEGADO}
+    public enum ResultadoEvento {EXITO, ERROR}
+    public enum NivelSeveridadEvento {INFO, ADVERTENCIA, CRITICO}
 }

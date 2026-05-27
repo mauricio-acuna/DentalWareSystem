@@ -8,6 +8,23 @@
 
 ---
 
+## Estado actual del codigo
+
+Ademas de la documentacion funcional, el repositorio ya incluye un backend Spring Boot en `codigo/backend`.
+
+El estado verificable del codigo esta documentado en [06_Documentacion/ESTADO_IMPLEMENTACION_FUNCIONAL.md](./06_Documentacion/ESTADO_IMPLEMENTACION_FUNCIONAL.md). Actualmente cubre pacientes, citas, disponibilidad basica, inventario, facturacion/pagos, tratamientos basicos, diagnosticos basicos, auditoria basica y reportes iniciales. Todavia no debe considerarse listo para produccion: faltan seguridad productiva, usuarios/roles, migraciones, frontend, RGPD completo, compras/proveedores, documentos clinicos, radiografias e integraciones.
+
+Para validar el backend:
+
+```powershell
+cd codigo/backend
+$env:JAVA_HOME="C:\Program Files\Java\jdk-17"
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+mvn.cmd verify
+```
+
+---
+
 ## 📌 DESCRIPCIÓN
 
 Se ha generado una **documentación completa y profesional** para la implementación de un **Sistema Integral de Gestión para Clínica Odontológica** conforme a estándares europeos.
