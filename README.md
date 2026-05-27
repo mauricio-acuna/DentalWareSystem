@@ -215,11 +215,17 @@ Se ha generado una **documentación completa y profesional** para la implementac
     - Casos de uso de IA permitidos y restringidos
     - Arquitectura segura para proveedores de IA
 
+19. **ESTADO_IMPLEMENTACION_FUNCIONAL.md** ⭐ **VERDAD DEL ALCANCE**
+    - Matriz de funcionalidades implementadas, parciales y pendientes
+    - Comparación contra API, procesos y modelos documentados
+    - Resultado de pruebas automatizadas
+    - Riesgos antes de producción
+
 ---
 
 ### 📁 07_Configuracion/
 
-19. **ARCHIVOS_CONFIGURACION.md**
+20. **ARCHIVOS_CONFIGURACION.md**
     - **.env** con 100+ variables de configuración
     - **docker-compose.yml** completo (PostgreSQL + Redis + Apps)
     - **Kubernetes Helm values** para despliegue profesional
@@ -227,12 +233,12 @@ Se ha generado una **documentación completa y profesional** para la implementac
     - **.gitignore** para repositorio
     - Configuración de CI/CD
 
-20. **DESPLIEGUE_PRODUCCION.md**
+21. **DESPLIEGUE_PRODUCCION.md**
     - Entornos local/dev/staging/prod
     - Build, Docker, smoke tests, blue/green, canary y rollback
     - Checklist pre-go-live y responsabilidades
 
-21. **CONFIGURACION_PRODUCCION.md**
+22. **CONFIGURACION_PRODUCCION.md**
     - Variables mínimas de producción
     - Gestión de secretos
     - Backups, logs, hardening y feature flags
@@ -242,7 +248,7 @@ Se ha generado una **documentación completa y profesional** para la implementac
 ## 📊 ESTADÍSTICAS DEL PROYECTO
 
 ```
-Documentos generados:        21+
+Documentos generados:        22+
 Páginas de documentación:    380+
 Líneas de código SQL:        1500+
 Endpoints API documentados:  40+

@@ -113,6 +113,12 @@
   - IA segura con humano en el circuito
   - Auditoría y evaluación de proveedores
 
+- **06_Documentacion/ESTADO_IMPLEMENTACION_FUNCIONAL.md** - Estado real del codigo frente a la documentacion
+  - Funcionalidades implementadas
+  - Funcionalidades parciales
+  - Funcionalidades pendientes
+  - Riesgos antes de produccion
+
 #### 8. CONFIGURACIÓN
 - **07_Configuracion/ARCHIVOS_CONFIGURACION.md** - Archivos de configuración
   - Variables de entorno (.env)
@@ -685,6 +691,7 @@ PRÓXIMAS 4 SEMANAS:
 - 📄 [06_Documentacion/DASHBOARD_TAREAS.md](./06_Documentacion/DASHBOARD_TAREAS.md)
 - 📄 [06_Documentacion/ROADMAP_TECNICO_MEJORAS.md](./06_Documentacion/ROADMAP_TECNICO_MEJORAS.md)
 - 📄 [06_Documentacion/INTEGRACIONES_IA_APIS.md](./06_Documentacion/INTEGRACIONES_IA_APIS.md)
+- 📄 [06_Documentacion/ESTADO_IMPLEMENTACION_FUNCIONAL.md](./06_Documentacion/ESTADO_IMPLEMENTACION_FUNCIONAL.md)
 - 📄 [07_Configuracion/ARCHIVOS_CONFIGURACION.md](./07_Configuracion/ARCHIVOS_CONFIGURACION.md)
 - 📄 [07_Configuracion/DESPLIEGUE_PRODUCCION.md](./07_Configuracion/DESPLIEGUE_PRODUCCION.md)
 - 📄 [07_Configuracion/CONFIGURACION_PRODUCCION.md](./07_Configuracion/CONFIGURACION_PRODUCCION.md)
