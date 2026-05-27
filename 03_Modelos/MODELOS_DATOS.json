@@ -1,0 +1,517 @@
+{
+  "titulo": "Modelos de Datos - Clínica Odontológica",
+  "version": "1.0.0",
+  "entidades": {
+    "Paciente": {
+      "descripcion": "Información demográfica y clínica de paciente",
+      "campos": {
+        "idPaciente": {
+          "tipo": "UUID",
+          "obligatorio": true,
+          "descripcion": "Identificador único del paciente"
+        },
+        "numeroIdentificacion": {
+          "tipo": "string",
+          "obligatorio": true,
+          "patron": "^[A-Z0-9]{8,12}$",
+          "descripcion": "DNI, NIE o Pasaporte"
+        },
+        "nombreCompleto": {
+          "tipo": "string",
+          "obligatorio": true,
+          "longitudMaxima": 150,
+          "descripcion": "Nombre(s)"
+        },
+        "apellidos": {
+          "tipo": "string",
+          "obligatorio": true,
+          "longitudMaxima": 150,
+          "descripcion": "Apellido(s)"
+        },
+        "fechaNacimiento": {
+          "tipo": "date",
+          "obligatorio": true,
+          "validacion": "edad >= 0 años",
+          "descripcion": "Fecha de nacimiento"
+        },
+        "genero": {
+          "tipo": "enum",
+          "valores": ["M", "F", "O"],
+          "descripcion": "Género del paciente"
+        },
+        "email": {
+          "tipo": "email",
+          "obligatorio": true,
+          "unico": true,
+          "descripcion": "Correo electrónico"
+        },
+        "telefonoMovil": {
+          "tipo": "phone",
+          "descripcion": "Teléfono móvil"
+        },
+        "direccion": {
+          "tipo": "object",
+          "campos": {
+            "calle": "string",
+            "numero": "string",
+            "codigoPostal": "string",
+            "ciudad": "string",
+            "pais": "string",
+            "provincia": "string"
+          }
+        },
+        "consentimientoRGPD": {
+          "tipo": "boolean",
+          "obligatorio": true,
+          "descripcion": "Consentimiento para tratamiento de datos personales"
+        },
+        "historialAlergias": {
+          "tipo": "array",
+          "items": {
+            "alergia": "string",
+            "severidad": "enum[LEVE|MODERADA|SEVERA]",
+            "reaccion": "string"
+          },
+          "descripcion": "Registro de alergias conocidas"
+        },
+        "patologiasBase": {
+          "tipo": "array",
+          "items": "string",
+          "descripcion": "Enfermedades de base del paciente"
+        },
+        "medicamentosActuales": {
+          "tipo": "array",
+          "items": {
+            "farmaco": "string",
+            "dosis": "string",
+            "frecuencia": "string",
+            "indicacion": "string"
+          }
+        },
+        "estado": {
+          "tipo": "enum",
+          "valores": ["ACTIVO", "INACTIVO", "SUSPENDIDO"],
+          "default": "ACTIVO"
+        },
+        "fechaAlta": {
+          "tipo": "timestamp",
+          "default": "NOW()"
+        },
+        "fechaBaja": {
+          "tipo": "timestamp",
+          "descripcion": "Null si paciente activo"
+        }
+      },
+      "indices": [
+        "numeroIdentificacion (UNIQUE)",
+        "email (UNIQUE)",
+        "estado",
+        "fechaAlta"
+      ]
+    },
+    "Empleado": {
+      "descripcion": "Personal profesional (dentistas, higienistas, administrativos)",
+      "campos": {
+        "idEmpleado": {
+          "tipo": "UUID",
+          "obligatorio": true
+        },
+        "numeroColegiado": {
+          "tipo": "string",
+          "obligatorio": true,
+          "unico": true,
+          "descripcion": "Número de colegio profesional"
+        },
+        "numeroIdentificacion": {
+          "tipo": "string",
+          "obligatorio": true,
+          "unico": true
+        },
+        "especialidad": {
+          "tipo": "enum",
+          "valores": ["DENTISTA", "HIGIENISTA", "AUXILIAR", "ADMINISTRATIVO", "GESTOR"],
+          "obligatorio": true
+        },
+        "nivelCualificacion": {
+          "tipo": "enum",
+          "valores": ["JUNIOR", "SENIOR", "ESPECIALISTA", "DIRECTOR"]
+        },
+        "paisRegistro": {
+          "tipo": "string",
+          "descripcion": "País donde está registrado profesionalmente"
+        },
+        "licenciasActivas": {
+          "tipo": "array",
+          "items": {
+            "tipo": "string",
+            "fechaExpiracion": "date"
+          }
+        },
+        "formacionContinua": {
+          "tipo": "array",
+          "items": {
+            "curso": "string",
+            "institucion": "string",
+            "fechaCompletacion": "date",
+            "horas": "integer",
+            "certificado": "boolean"
+          }
+        },
+        "horario": {
+          "tipo": "object",
+          "campos": {
+            "lunes": "string",
+            "martes": "string",
+            "miercoles": "string",
+            "jueves": "string",
+            "viernes": "string",
+            "sabado": "string",
+            "domingo": "string"
+          }
+        },
+        "permisoFirmarDocumentos": {
+          "tipo": "boolean",
+          "default": false
+        },
+        "firmaDigital": {
+          "tipo": "binary",
+          "descripcion": "Certificado de firma digital"
+        }
+      }
+    },
+    "Cita": {
+      "descripcion": "Cita clínica con paciente",
+      "campos": {
+        "idCita": {
+          "tipo": "UUID",
+          "obligatorio": true
+        },
+        "idPaciente": {
+          "tipo": "UUID",
+          "obligatorio": true,
+          "referencia": "Paciente"
+        },
+        "idDentista": {
+          "tipo": "UUID",
+          "referencia": "Empleado"
+        },
+        "idHigienista": {
+          "tipo": "UUID",
+          "referencia": "Empleado"
+        },
+        "fechaCita": {
+          "tipo": "date",
+          "obligatorio": true,
+          "validacion": "fecha >= HOY"
+        },
+        "horaInicio": {
+          "tipo": "time",
+          "obligatorio": true
+        },
+        "horaFin": {
+          "tipo": "time",
+          "obligatorio": true,
+          "validacion": "horaFin > horaInicio"
+        },
+        "duracionEstimada": {
+          "tipo": "integer",
+          "unidad": "minutos"
+        },
+        "tipoCita": {
+          "tipo": "enum",
+          "valores": ["CONSULTA", "TRATAMIENTO", "URGENCIA", "SEGUIMIENTO"],
+          "obligatorio": true
+        },
+        "estado": {
+          "tipo": "enum",
+          "valores": ["PROGRAMADA", "CONFIRMADA", "COMPLETADA", "CANCELADA", "NO_PRESENTADO"],
+          "default": "PROGRAMADA"
+        },
+        "motivoConsulta": {
+          "tipo": "string",
+          "descripcion": "Motivo de la consulta según paciente"
+        },
+        "resultadoCita": {
+          "tipo": "string",
+          "descripcion": "Resultado y hallazgos de la cita"
+        },
+        "procedimientos": {
+          "tipo": "array",
+          "items": {
+            "codigo": "string",
+            "descripcion": "string",
+            "duracion": "integer"
+          }
+        },
+        "proximoSeguimiento": {
+          "tipo": "date"
+        },
+        "prioridad": {
+          "tipo": "enum",
+          "valores": ["BAJA", "MEDIA", "ALTA", "URGENCIA"]
+        }
+      }
+    },
+    "Tratamiento": {
+      "descripcion": "Tratamiento odontológico realizado",
+      "campos": {
+        "idTratamiento": {
+          "tipo": "UUID",
+          "obligatorio": true
+        },
+        "codigoTratamiento": {
+          "tipo": "string",
+          "unico": true,
+          "obligatorio": true
+        },
+        "nombreTratamiento": {
+          "tipo": "string",
+          "obligatorio": true
+        },
+        "clasificacion": {
+          "tipo": "enum",
+          "valores": ["PREVENTIVA", "RESTAURADORA", "ENDODONCIA", "PERIODONTAL", "QUIRURGICA", "ORTODONCIA", "ESTETICA"],
+          "obligatorio": true
+        },
+        "dienteAfectado": {
+          "tipo": "string",
+          "patron": "^(1[1-8]|2[1-8]|3[1-8]|4[1-8])$",
+          "descripcion": "Numeración FDI (1-8: sup-der, 9-16: sup-izq, 17-24: inf-izq, 25-32: inf-der)"
+        },
+        "presupuesto": {
+          "tipo": "numeric",
+          "decimales": 2
+        },
+        "costeReal": {
+          "tipo": "numeric",
+          "decimales": 2
+        },
+        "coberturaSeguró": {
+          "tipo": "numeric",
+          "decimales": 2
+        },
+        "copagoPaciente": {
+          "tipo": "numeric",
+          "decimales": 2
+        },
+        "materialesUtilizados": {
+          "tipo": "array",
+          "items": {
+            "idInsumo": "UUID",
+            "cantidad": "numeric",
+            "precio": "numeric"
+          }
+        },
+        "estado": {
+          "tipo": "enum",
+          "valores": ["PENDIENTE", "EN_CURSO", "COMPLETADO", "SUSPENDIDO", "CANCELADO"],
+          "default": "PENDIENTE"
+        }
+      }
+    },
+    "Factura": {
+      "descripcion": "Factura de servicios prestados",
+      "campos": {
+        "idFactura": {
+          "tipo": "UUID",
+          "obligatorio": true
+        },
+        "numeroFactura": {
+          "tipo": "string",
+          "unico": true,
+          "obligatorio": true,
+          "patron": "^[A-Z]{3}-[0-9]{6}$",
+          "descripcion": "Número de factura con validación legal española"
+        },
+        "idPaciente": {
+          "tipo": "UUID",
+          "obligatorio": true,
+          "referencia": "Paciente"
+        },
+        "fechaFactura": {
+          "tipo": "date",
+          "obligatorio": true
+        },
+        "fechaVencimiento": {
+          "tipo": "date",
+          "obligatorio": true
+        },
+        "tipoFactura": {
+          "tipo": "enum",
+          "valores": ["ORDINARIA", "SIMPLIFICADA", "RECTIFICATIVA", "COMPLEMENTARIA"],
+          "default": "ORDINARIA"
+        },
+        "lineas": {
+          "tipo": "array",
+          "items": {
+            "idLinea": "UUID",
+            "concepto": "string",
+            "cantidad": "numeric",
+            "precioUnitario": "numeric",
+            "ivaPercent": "numeric",
+            "importeLinea": "numeric"
+          }
+        },
+        "baseImponible": {
+          "tipo": "numeric",
+          "decimales": 2,
+          "obligatorio": true
+        },
+        "iva": {
+          "tipo": "numeric",
+          "decimales": 2
+        },
+        "importeTotal": {
+          "tipo": "numeric",
+          "decimales": 2,
+          "obligatorio": true
+        },
+        "estado": {
+          "tipo": "enum",
+          "valores": ["EMITIDA", "PAGADA", "PARCIAL", "VENCIDA", "CANCELADA", "ANULADA"],
+          "default": "EMITIDA"
+        },
+        "formaPago": {
+          "tipo": "enum",
+          "valores": ["EFECTIVO", "TRANSFERENCIA", "TARJETA", "CHEQUE", "DOMICILIACION"]
+        }
+      }
+    },
+    "Insumo": {
+      "descripcion": "Material o consumible del almacén",
+      "campos": {
+        "idInsumo": {
+          "tipo": "UUID",
+          "obligatorio": true
+        },
+        "codigoInsumo": {
+          "tipo": "string",
+          "unico": true,
+          "obligatorio": true
+        },
+        "nombreProducto": {
+          "tipo": "string",
+          "obligatorio": true
+        },
+        "categoria": {
+          "tipo": "enum",
+          "valores": ["INSTRUMENTOS", "MATERIALES_OBTURACION", "MEDICAMENTOS", "EQUIPOS_CONSUMIBLES", "OTROS"],
+          "obligatorio": true
+        },
+        "fabricante": {
+          "tipo": "string"
+        },
+        "codigoLote": {
+          "tipo": "string"
+        },
+        "fechaCaducidad": {
+          "tipo": "date"
+        },
+        "precioCompra": {
+          "tipo": "numeric",
+          "decimales": 2,
+          "obligatorio": true
+        },
+        "precioVenta": {
+          "tipo": "numeric",
+          "decimales": 2
+        },
+        "stockActual": {
+          "tipo": "integer",
+          "default": 0
+        },
+        "stockMinimo": {
+          "tipo": "integer",
+          "default": 0
+        },
+        "stockOptimo": {
+          "tipo": "integer",
+          "default": 0
+        },
+        "ubicacionAlmacen": {
+          "tipo": "string"
+        },
+        "certificacionCE": {
+          "tipo": "boolean"
+        },
+        "biocompatibilidad": {
+          "tipo": "boolean"
+        },
+        "requiereEsterilizacion": {
+          "tipo": "boolean"
+        }
+      }
+    },
+    "Proveedor": {
+      "descripcion": "Proveedor de materiales y servicios",
+      "campos": {
+        "idProveedor": {
+          "tipo": "UUID",
+          "obligatorio": true
+        },
+        "numeroIdentificacion": {
+          "tipo": "string",
+          "unico": true,
+          "obligatorio": true,
+          "descripcion": "CIF o NIF del proveedor"
+        },
+        "razonSocial": {
+          "tipo": "string",
+          "unico": true,
+          "obligatorio": true
+        },
+        "tipoProveedor": {
+          "tipo": "enum",
+          "valores": ["MATERIALES", "EQUIPOS", "SERVICIOS", "MIXTO"],
+          "obligatorio": true
+        },
+        "contacto": {
+          "tipo": "object",
+          "campos": {
+            "nombre": "string",
+            "telefono": "phone",
+            "email": "email",
+            "cargo": "string"
+          }
+        },
+        "direccion": {
+          "tipo": "object",
+          "campos": {
+            "calle": "string",
+            "numero": "string",
+            "codigoPostal": "string",
+            "ciudad": "string",
+            "pais": "string"
+          }
+        },
+        "datosCompra": {
+          "tipo": "object",
+          "campos": {
+            "iban": "string",
+            "formaPago": "enum[CONTADO|CREDITO|TRANSFERENCIA|DOMICILIACION]",
+            "diasPagoMedio": "integer"
+          }
+        },
+        "certificaciones": {
+          "tipo": "array",
+          "items": {
+            "tipo": "string",
+            "fechaExpiracion": "date"
+          }
+        },
+        "calificacion": {
+          "tipo": "numeric",
+          "minimo": 0,
+          "maximo": 10,
+          "decimales": 1
+        }
+      }
+    }
+  },
+  "restricciones_globales": {
+    "encriptacion": "AES-256 para datos sensibles (números identificación, contraseñas)",
+    "complianciaDatos": "RGPD - Derecho a olvido implementado",
+    "integridad": "Todos los cambios auditados",
+    "retencion": "Mínimo 3 años para histórico clínico según normativa sanitaria"
+  }
+}
